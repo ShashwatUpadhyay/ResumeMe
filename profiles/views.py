@@ -1,16 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
+from django.contrib.auth.models import User
+from django.db.models import Q
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/login')
 def profile(request):
     return render(request, 'profile.html')
 
-def registration(request):
-    if request.method == 'POST':
-        print(request.POST)
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-    return render(request, 'register.html')
