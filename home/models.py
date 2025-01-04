@@ -16,6 +16,9 @@ class UserExtra(models.Model):
     github = models.CharField(max_length=200, null=True, blank=True)
     linkdin = models.CharField(max_length=200, null=True, blank=True) 
     
+    def __str__(self):
+        return self.user.first_name
+    
 class Expirence(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
@@ -23,3 +26,5 @@ class Expirence(models.Model):
     job_role = models.CharField(max_length=100, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.job_type

@@ -5,18 +5,28 @@
 <center>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-  <div style="max-width: 500px;">
+  <div style="max-width: 600px;">
 <div class="avatar my-2">
   <div class="w-24 rounded-full">
-    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+    
+    <img
+      {% if data.profile_photo %}
+        src="{{ data.profile_photo.url }}"
+      {% else %}
+        src="/static/images.png"
+      {% endif %}
+      alt="Profile Photo"
+      />
+      
+    <!-- <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" /> -->
   </div>
 </div>
 <br>
 <label class="form-control w-full max-w-xs">
   <div class="label">
-    <span class="label-text">Profile Photo</span>
+    <span class="label-text">Change Profile Photo</span>
   </div>
-<input name="profile_photo" type="file" class="file-input w-full max-w-xs my-2" />
+<input name="profile_photo" type="file"  class="file-input w-full max-w-xs my-2" />
 </label>
 
 <!-- Bio/Discription -->
@@ -24,7 +34,7 @@
   <div class="label">
     <span class="label-text">Bio</span>
   </div>
-<textarea name="bio" class="textarea textarea-bordered textarea-lg w-full max-w-xs my-2" placeholder="Bio"></textarea>
+<textarea name="bio" value="{{ data.bio }}" class="textarea textarea-bordered textarea-lg w-full max-w-xs my-2" placeholder="Bio">{{ data.bio }}</textarea>
 </label>
 
 <!-- School -->
@@ -32,7 +42,7 @@
   <div class="label">
     <span class="label-text">College/Degree</span>
   </div>
-  <input name="education" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <input name="education" type="text" value="{{ data.education }}" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
   <div class="label">
   </div>
 </label>
@@ -40,27 +50,29 @@
 <!-- state -->
 <label class="form-control w-full max-w-xs">
   <div class="label">
-    <span class="label-text">Select state</span>
+    <span class="label-text">State</span>
   </div>
-<select name="state" class="select select-bordered my-2" onchange="print_city('state', this.selectedIndex);" id="sts" name ="stt" class="form-control" required></select>
+  <input name="state" type="text" value="{{ data.state }}" readonly placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <div class="label">
+  </div>
 </label>
 
 <!-- city -->
 <label class="form-control w-full max-w-xs">
   <div class="label">
-    <span class="label-text">Select city</span>
+    <span class="label-text">State</span>
   </div>
-<select name="city" class="select select-bordered my-2" id ="state" class="form-control" required></select>
+  <input name="city" type="text" value="{{ data.city }}" readonly placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <div class="label">
+  </div>
 </label>
-<script language="javascript">print_state("sts");</script>
-</div>
 
 <!-- GitHub -->
 <label class="form-control w-full max-w-xs">
   <div class="label">
     <span class="label-text">GitHub Link:</span>
   </div>
-  <input name="github" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <input name="github" type="text" placeholder="Type here" value="{{ data.github }}" class="input input-bordered w-full max-w-xs" />
   <div class="label">
   </div>
 </label>
@@ -70,7 +82,7 @@
   <div class="label">
     <span class="label-text">Linkdin Link:</span>
   </div>
-  <input name="linkdin" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+  <input name="linkdin" type="text" placeholder="Type here" value="{{ data.linkdin }}" class="input input-bordered w-full max-w-xs" />
   <div class="label">
   </div>
 </label>
@@ -80,12 +92,125 @@
   <div class="label">
     <span class="label-text">Skills</span>
   </div>
-<textarea name="skills" class="textarea textarea-bordered textarea-sm w-full max-w-xs my-2" placeholder="Skills"></textarea>
+<textarea name="skills"  class="textarea textarea-bordered textarea-sm w-full max-w-xs my-2" placeholder="Skills">{{ data.skills }}</textarea>
 </label>
 
+<h1 class="mt-4 text-xl">Experience</h1>
+<!-- Experience -->
+<ul class="timeline timeline-vertical">
+  <li>
+    <div class="timeline-start">1984</div>
+    <div class="timeline-middle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-5 w-5">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="timeline-end timeline-box">First Macintosh computer</div>
+    <hr />
+  </li>
+  <li>
+    <hr />
+    <div class="timeline-start">1998</div>
+    <div class="timeline-middle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-5 w-5">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="timeline-end timeline-box">iMac</div>
+    <hr />
+  </li>
+  <li>
+    <hr />
+    <div class="timeline-start">2001</div>
+    <div class="timeline-middle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-5 w-5">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="timeline-end timeline-box">iPod</div>
+    <hr />
+  </li>
+  <li>
+    <hr />
+    <div class="timeline-start">2007</div>
+    <div class="timeline-middle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-5 w-5">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="timeline-end timeline-box">iPhone</div>
+    <hr />
+  </li>
+  <li>
+    <hr />
+    <div class="timeline-start">2015</div>
+    <div class="timeline-middle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="h-5 w-5">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="timeline-end timeline-box">Apple Watch</div>
+  </li>
+</ul>
+<br>
 
+<button
+  title="Add New"
+  class="group cursor-pointer outline-none hover:rotate-90 duration-300"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="50px"
+    height="50px"
+    viewBox="0 0 24 24"
+    class="stroke-zinc-400 fill-none group-hover:fill-zinc-800 group-active:stroke-zinc-200 group-active:fill-zinc-600 group-active:duration-0 duration-300"
+  >
+    <path
+      d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+      stroke-width="1.5"
+    ></path>
+    <path d="M8 12H16" stroke-width="1.5"></path>
+    <path d="M12 16V8" stroke-width="1.5"></path>
+  </svg>
+</button>
+
+<br>
 <!-- update -->
-
 <button class="btn btn-wide my-2" type="submit">Update</button>
 </form>
 </center>

@@ -7,14 +7,15 @@
     <title>ResumeMe</title>
     
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
        body{
         background-color: neutral-content;
        }
     </style>
 </head>
-<body>   
+<body>  
+  {% load static %} 
     <div class="navbar ">
         <div class="navbar-start">
           <div class="dropdown">
@@ -63,8 +64,15 @@
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                  
+                  {% if data.profile_photo %}
+                    src="{{ data.profile_photo.url }}"
+                  {% else %}
+                    src="/static/images.png"
+                  {% endif %}
+                  alt="Profile Photo"
+
+                  />
               </div>
             </div>
             <ul

@@ -4,11 +4,15 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from . import models
 # Create your views here.
 @login_required(login_url='/login')
 def home(request):
-    return render(request, 'home.html')
+    try:
+        user_obj = models.UserExtra.objects.get(user=request.user)
+    except models.UserExtra.DoesNotExist:
+        return render(request, 'home.html', {'error': 'Profile not found'})
+    return render(request, 'home.html', {'data':user_obj})
 
 def registration(request):
     if request.method == 'POST':
@@ -17,6 +21,8 @@ def registration(request):
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
 
         user_obj = User.objects.filter(Q(username  = username) | Q(email = email))
         if user_obj.exists():
@@ -30,6 +36,7 @@ def registration(request):
         )
         user_obj.set_password(password)
         user_obj.save()
+        models.UserExtra.objects.create(user = user_obj, state = state,city = city).save()
         messages.success(request , "Your account has been created!")
         redirect('/login')
         
@@ -63,7 +70,9 @@ def logout_page(request):
 
 def people(request):
     user_obj = User.objects.all()
-    data = {
-        "people" : user_obj
-    }
-    return render(request, 'people.html', data)
+    try:
+        user_obj = models.UserExtra.objects.get(user=request.user)
+    except models.UserExtra.DoesNotExist:
+        return render(request, 'home.html', {'error': 'Profile not found'})
+    
+    return render(request, 'people.html', {'data':user_obj})
