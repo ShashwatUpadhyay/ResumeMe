@@ -59,3 +59,11 @@ def logout_page(request):
     logout(request)
     messages.success(request, "logout successful")
     return redirect('/login')
+
+
+def people(request):
+    user_obj = User.objects.all()
+    data = {
+        "people" : user_obj
+    }
+    return render(request, 'people.html', data)
