@@ -71,7 +71,7 @@ def logout_page(request):
 def people(request):
     user_obj = User.objects.all()
     try:
-        user_obj = models.UserExtra.objects.get(user=request.user)
+        user_obj = models.UserExtra.objects.all()
     except models.UserExtra.DoesNotExist:
         return render(request, 'home.html', {'error': 'Profile not found'})
     

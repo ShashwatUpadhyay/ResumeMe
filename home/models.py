@@ -24,7 +24,8 @@ class Expirence(models.Model):
     to_date = models.DateField()
     job_type = models.CharField(max_length=50)
     job_role = models.CharField(max_length=100, null=True)
+    organization = models.CharField(max_length=100, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.job_type
+        return self.job_type + " " + self.organization

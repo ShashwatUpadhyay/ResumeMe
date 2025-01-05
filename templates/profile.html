@@ -32,9 +32,9 @@
 <!-- Bio/Discription -->
 <label class="form-control w-full max-w-xs">
   <div class="label">
-    <span class="label-text">Bio</span>
+    <span class="label-text">About</span>
   </div>
-<textarea name="bio" value="{{ data.bio }}" class="textarea textarea-bordered textarea-lg w-full max-w-xs my-2" placeholder="Bio">{{ data.bio }}</textarea>
+<textarea name="bio" value="{{ data.bio }}" class="textarea textarea-bordered textarea-lg w-full max-w-xs my-2" placeholder="About">{{ data.bio }}</textarea>
 </label>
 
 <!-- School -->
@@ -96,10 +96,12 @@
 </label>
 
 <h1 class="mt-4 text-xl">Experience</h1>
+
 <!-- Experience -->
 <ul class="timeline timeline-vertical">
+  {% for exp in exp %}
   <li>
-    <div class="timeline-start">1984</div>
+    <div class="timeline-start">{{exp.from_date}}</div>
     <div class="timeline-middle">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -112,86 +114,17 @@
           clip-rule="evenodd" />
       </svg>
     </div>
-    <div class="timeline-end timeline-box">First Macintosh computer</div>
+    <div class="timeline-end timeline-box">{{ exp.organization }}</div>
     <hr />
   </li>
-  <li>
-    <hr />
-    <div class="timeline-start">1998</div>
-    <div class="timeline-middle">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="h-5 w-5">
-        <path
-          fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-          clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="timeline-end timeline-box">iMac</div>
-    <hr />
-  </li>
-  <li>
-    <hr />
-    <div class="timeline-start">2001</div>
-    <div class="timeline-middle">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="h-5 w-5">
-        <path
-          fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-          clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="timeline-end timeline-box">iPod</div>
-    <hr />
-  </li>
-  <li>
-    <hr />
-    <div class="timeline-start">2007</div>
-    <div class="timeline-middle">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="h-5 w-5">
-        <path
-          fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-          clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="timeline-end timeline-box">iPhone</div>
-    <hr />
-  </li>
-  <li>
-    <hr />
-    <div class="timeline-start">2015</div>
-    <div class="timeline-middle">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="h-5 w-5">
-        <path
-          fill-rule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-          clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="timeline-end timeline-box">Apple Watch</div>
-  </li>
+  {% endfor %}
 </ul>
 <br>
 
-<button
+<div
   title="Add New"
   class="group cursor-pointer outline-none hover:rotate-90 duration-300"
+  onclick="my_modal_1.showModal()"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -207,8 +140,54 @@
     <path d="M8 12H16" stroke-width="1.5"></path>
     <path d="M12 16V8" stroke-width="1.5"></path>
   </svg>
-</button>
+</div>
 
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">job type</span>
+      </div>
+    <select name="job_type" class="select select-bordered w-full max-w-xs">
+      <option disabled selected>job type?</option>
+      <option value="internship">Internship</option>
+      <option value="full_time">Full Time</option>
+      <option value="part_time">Part Time</option>
+    </select>
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">from</span>
+      </div>
+    <input type="date" name="from_date" placeholder="Type here" class="input w-full max-w-xs" />
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">to</span>
+      </div>
+    <input type="date" name="to_date"  placeholder="Type here" class="input w-full max-w-xs" />
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">Company</span>
+      </div>
+    <input type="text" name="organization"  placeholder="Type here" class="input w-full max-w-xs" />
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">job role</span>
+      </div>
+    <input type="text" name="job_role" placeholder="Type here" class="input w-full max-w-xs" />
+    </label>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <p class="py-4">ESC key to cancel</p>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 <br>
 <!-- update -->
 <button class="btn btn-wide my-2" type="submit">Update</button>
