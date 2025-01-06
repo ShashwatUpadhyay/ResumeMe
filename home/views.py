@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . import models
-# Create your views here.
-@login_required(login_url='/login')
+# # Create your views here.
+# @login_required(login_url='/login')
 def home(request):
     try:
         user_obj = models.UserExtra.objects.get(user=request.user)
