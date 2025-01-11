@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('profile/', include('profiles.urls')),
+    path("ckeditor/", include('ckeditor_uploader.urls')),
+    path('blog/', include('blog.urls')),
 ]
-if settings.DEBUG:  # Serve media files only in development
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:  # Serve media files only in development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

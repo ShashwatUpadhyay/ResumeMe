@@ -9,9 +9,12 @@ from . import models
 # @login_required(login_url='/login')
 def home(request):
     try:
-        user_obj = models.UserExtra.objects.get(user=request.user)
-    except models.UserExtra.DoesNotExist:
-        return render(request, 'home.html', {'error': 'Profile not found'})
+        user_obj = models.UserExtra.objects.all()
+        # print(type(user_obj))
+        if models.UserExtra.objects.get(user=request.user):
+            user_obj = models.UserExtra.objects.get(user=request.user)
+    except Exception as e:
+        return render(request, 'home.html', {'error': f'{e}'})
     return render(request, 'home.html', {'data':user_obj})
 
 def registration(request):
@@ -70,9 +73,12 @@ def logout_page(request):
 
 def people(request):
     user_obj = User.objects.all()
-    try:
-        user_obj = models.UserExtra.objects.all()
-    except models.UserExtra.DoesNotExist:
-        return render(request, 'home.html', {'error': 'Profile not found'})
+    logined_user = User.objects.all()
     
-    return render(request, 'people.html', {'data':user_obj})
+    try:
+        user_obj = models.UserExtra.objects.all().order_by("join_date")
+        logined_user = models.UserExtra.objects.get(user=request.user)
+    except Exception as e:
+        return render(request, 'home.html', {'error': f'{e}'})
+    
+    return render(request, 'people.html', {'user_obj':user_obj, 'data':logined_user})

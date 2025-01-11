@@ -15,6 +15,7 @@ class UserExtra(models.Model):
     state =  models.CharField(max_length=30,null=True, blank=True)
     github = models.CharField(max_length=200, null=True, blank=True)
     linkdin = models.CharField(max_length=200, null=True, blank=True) 
+    join_date = models.DateTimeField(auto_now_add=True) 
     
     def __str__(self):
         return self.user.first_name

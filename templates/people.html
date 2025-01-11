@@ -16,20 +16,20 @@
         </svg>
       </label>
 
-{% for data in data %}
+{% for user_obj in user_obj %}
 <div class="card card-side bg-base-100 shadow-xl mt-2 mb-2">
     <figure >
       <!-- <img
-        src="{{data.profile_photo.url}}"
+        src="{{data.profile_photo.url}}"  
         alt="Movie" /> -->
         <img
         style="width: 250px;"
   class="mask mask-circle"
-  src="{{data.profile_photo.url}}" />
+  src="{{user_obj.profile_photo.url}}" />
     </figure>
     <div class="card-body">
-      <h2 class="card-title">{{ data.user.first_name }} {{ data.user.last_name }}</h2>
-      <p>{{ data.bio }}.</p>
+      <h2 class="card-title">{{ user_obj.user.first_name }} {{ user_obj.user.last_name }}</h2>
+      <p>{{ user_obj.bio }}.</p>
       <div class="card-actions justify-end">
         <button class="btn btn-primary">View</button>
       </div>

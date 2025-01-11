@@ -1,0 +1,23 @@
+{% include "base.html" %}
+
+
+
+{% for blog in blogs %}
+<div class="card lg:card-side bg-base-100 shadow-xl m-10 ">
+    <figure>
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
+        alt="Album" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title"><a href="{% url 'blog_detail' slug=blog.slug %}">{{ blog.title }}</a></h2>
+            <p>{{ blog.created_at|date:"F d, Y" }} by {{ blog.author }}</p>
+            <p>{{ blog.content|truncatechars:200|safe  }}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary">Listen</button>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% include "footer.html" %}
+
